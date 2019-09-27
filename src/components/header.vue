@@ -1,7 +1,6 @@
 <template>
   <div class="header">
     <el-breadcrumb separator="/">
-      <el-breadcrumb-item :to="{ path: '/article' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item v-for="(item, index) in $route.meta" :key="index">{{item}}</el-breadcrumb-item>
     </el-breadcrumb>
     <div class="h-right">
@@ -26,10 +25,10 @@ export default {
   data() {
     return {};
   },
-  created() {},
-  mounted() {
+  updated() {
     console.log(this.$route.meta);
   },
+  mounted() {},
   computed: {
     ...mapState(["userInfo"])
   },

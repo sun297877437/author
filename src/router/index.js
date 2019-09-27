@@ -15,10 +15,18 @@ const routes = [{
         path: "/manage",
         name: "manage",
         component: resolve => require(["@/components/manage"], resolve),
+        redirect: 'home',
         meta: {
-            title: "主页"
+            title: "后台"
         },
         children: [{
+                path: "/home",
+                name: "home",
+                component: resolve => require(["@/pages/home"], resolve),
+                meta: {
+                    title: "主页"
+                }
+            }, {
                 path: "/articlePub",
                 name: "articlePub",
                 component: resolve => require(["@/pages/articlePub"], resolve),
@@ -32,6 +40,29 @@ const routes = [{
                 component: resolve => require(["@/pages/videoPub"], resolve),
                 meta: {
                     title: "发表视频"
+                }
+            },
+            {
+                path: "/videoAdd",
+                name: "videoAdd",
+                component: resolve => require(["@/pages/videoAdd"], resolve),
+                meta: {
+                    title: "添加视频"
+                }
+            }, {
+                path: "/articleList",
+                name: "articleList",
+                component: resolve => require(["@/pages/articleList"], resolve),
+                meta: {
+                    title: "美文列表"
+                }
+            },
+            {
+                path: "/videoList",
+                name: "videoList",
+                component: resolve => require(["@/pages/videoList"], resolve),
+                meta: {
+                    title: "课程列表"
                 }
             },
             {
@@ -56,22 +87,6 @@ const routes = [{
                 component: resolve => require(["@/pages/editPassword"], resolve),
                 meta: {
                     title: "修改密码"
-                }
-            },
-            {
-                path: "/articleSpecification",
-                name: "articleSpecification",
-                component: resolve => require(["@/pages/articleSpecification"], resolve),
-                meta: {
-                    title: "发文规范"
-                }
-            },
-            {
-                path: "/videoSpecification",
-                name: "videoSpecification",
-                component: resolve => require(["@/pages/videoSpecification"], resolve),
-                meta: {
-                    title: "课程规范"
                 }
             }
         ]

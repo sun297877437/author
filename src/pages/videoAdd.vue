@@ -14,44 +14,50 @@
             label-width="80px"
             style="border: 1px solid #eaeefb;padding: 10px 10px 0;"
           >
-            <el-form-item label="名称">
+            <el-form-item label="选择课程">
+              <el-input v-model="form.intro"></el-input>
+            </el-form-item>
+            <el-form-item label="视频名称">
               <el-input v-model="form.title"></el-input>
             </el-form-item>
             <el-form-item label="资费">
               <el-radio v-model="radio" label="0">免费</el-radio>
               <el-radio v-model="radio" label="1">付费</el-radio>
             </el-form-item>
-            <el-form-item label="价格">
-              <el-input type="number" v-model="form.title" min="1" max="9999"></el-input>
-            </el-form-item>
-            <el-form-item label="课程简介">
-              <el-input v-model="form.intro" type="textarea" autosize></el-input>
-            </el-form-item>
-            <el-form-item label="课程封面">
+            <el-form-item label="上传视频">
               <el-upload
+                class="avatar-uploader el-upload--text"
                 action="https://jsonplaceholder.typicode.com/posts/"
-                list-type="picture-card"
-                :on-success="success"
-                :on-preview="preview"
-                :on-remove="remove"
-                :limit="1"
-                :before-upload="restrict"
+                :show-file-list="false"
+                :on-success="handleVideoSuccess"
+                :before-upload="beforeUploadVideo"
+                :on-progress="uploadVideoProcess"
               >
-                <i class="el-icon-plus"></i>
+                <video
+                  v-if="video !='' && videoFlag == false"
+                  :src="video"
+                  class="avatar"
+                  controls="controls"
+                >您的浏览器不支持视频播放</video>
+                <i
+                  v-else-if="video =='' && videoFlag == false"
+                  class="el-icon-plus avatar-uploader-icon"
+                ></i>
+                <el-progress
+                  v-if="videoFlag == true"
+                  type="circle"
+                  :percentage="videoUploadPercent"
+                  style="margin-top:30px;"
+                ></el-progress>
               </el-upload>
-              <el-dialog :visible.sync="dialogVisible">
-                <img width="100%" :src="dialogImageUrl" alt />
-              </el-dialog>
-            </el-form-item>
-            <el-form-item label="添加课程">
-              <el-input v-model="form.intro"></el-input>
+              <P class="text">请保证视频格式正确，且不超过100M</P>
             </el-form-item>
           </el-form>
         </el-col>
       </el-row>
     </section>
     <footer class="footer">
-      <p>课程: 11节</p>
+      <p>课程: 视频小节</p>
       <el-button type="danger" @click="submitForm">立即发布</el-button>
     </footer>
   </div>
@@ -60,20 +66,17 @@
 <script>
 import { apiLogin } from "@/config/api.js";
 import { mapState } from "vuex";
-import { resolve } from "q";
 export default {
   name: "videoPub",
   data() {
     return {
+      videoFlag: false,
+      video: "",
+      videoUploadPercent: "", //视频上传进度
       radio: "0",
-      dialogImageUrl: "", //set预览图片
-      dialogVisible: false, //set预览图片
       form: {
-        title: "", //标题
-        intro: "", //内容
-        imageUrl: [] //上传图片
-      },
-      textLength: 0
+        title: "" //视频标题
+      }
     };
   },
   created() {},
@@ -81,24 +84,44 @@ export default {
     ...mapState(["userInfo"])
   },
   methods: {
+    beforeUploadVideo(file) {
+      const isLt10M = file.size / 1024 / 1024 < 100;
+      if (
+        [
+          "video/mp4",
+          "video/ogg",
+          "video/flv",
+          "video/avi",
+          "video/wmv",
+          "video/rmvb"
+        ].indexOf(file.type) == -1
+      ) {
+        this.$message.error("请上传正确的视频格式");
+        return false;
+      }
+      if (!isLt10M) {
+        this.$message.error("上传视频大小不能超过100MB哦!");
+        return false;
+      }
+    },
+    uploadVideoProcess(event, file, fileList) {
+      this.videoFlag = true;
+      this.videoUploadPercent = file.percentage.toFixed(0) * 1;
+    },
+    handleVideoSuccess(res, file) {
+      this.videoFlag = false;
+      console.log(res);
+      this.videoUploadPercent = 0;
+      if (res.status == 200) {
+        this.video = res.data.uploadUrl;
+      } else {
+        this.$message.error("视频上传失败，请重新上传！");
+      }
+    },
     submitForm() {
-      if (this.form.title.length > 20 || this.form.title.length < 10) {
+      if (!this.form.title.length) {
         this.$message({
-          message: "标题字数应在10-20之间",
-          type: "warning"
-        });
-        return false;
-      }
-      if (this.textLength < 99) {
-        this.$message({
-          message: "文章内容不得小于100字",
-          type: "warning"
-        });
-        return false;
-      }
-      if (this.form.imageUrl.length < 1) {
-        this.$message({
-          message: "请上传文章封面",
+          message: "请输入视频标题",
           type: "warning"
         });
         return false;
@@ -107,27 +130,6 @@ export default {
     // 提交
     saveHtml(event) {
       console.log(this.form.content);
-    },
-    //预览图片
-    preview(file) {
-      this.dialogImageUrl = file.url;
-      this.dialogVisible = true;
-    },
-    //上传成功
-    success(response, file, fileList) {
-      console.log(fileList);
-    },
-    //删除图片
-    remove(file, fileList) {
-      console.log(file, fileList);
-    },
-    //限制图片大小
-    restrict(file) {
-      const isLt2M = file.size / 1024 / 1024 < 1;
-      if (!isLt2M) {
-        this.$message.error("上传头像图片大小不能超过 1MB!");
-      }
-      return isLt2M;
     }
   }
 };
@@ -146,15 +148,19 @@ export default {
 .avatar-uploader-icon {
   font-size: 28px;
   color: #8c939d;
-  width: 180px;
-  height: 100px;
-  line-height: 100px;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
   text-align: center;
 }
 .avatar {
-  width: 180px;
-  height: 100px;
+  width: 178px;
+  height: 178px;
   display: block;
+}
+.video-avatar {
+  width: 400px;
+  height: 200px;
 }
 </style>
 <style lang="scss" scope>

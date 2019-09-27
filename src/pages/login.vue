@@ -70,7 +70,7 @@ export default {
           console.log("success");
         })
         .catch(() => {
-          vm.$router.push({ name: "articlePub" });
+          vm.$router.push({ name: "home" });
         });
     }
   }

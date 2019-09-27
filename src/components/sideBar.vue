@@ -40,23 +40,47 @@ export default {
     return {
       items: [
         {
-          icon: "el-icon-menu",
-          index: "0",
-          title: "发表",
+          icon: "el-icon-s-home",
+          index: "home",
+          title: "主页"
+        },
+        {
+          icon: "el-icon-s-promotion",
+          index: "1",
+          title: "创作发表",
           subs: [
             {
               index: "articlePub",
-              title: "文章发表"
+              title: "美文发表"
             },
             {
               index: "videoPub",
               title: "课程发表"
+            },
+            {
+              index: "videoAdd",
+              title: "添加视频"
             }
           ]
         },
         {
-          icon: "el-icon-menu",
-          index: "1",
+          icon: "el-icon-s-data",
+          index: "0",
+          title: "内容管理",
+          subs: [
+            {
+              index: "articleList",
+              title: "美文列表"
+            },
+            {
+              index: "videoList",
+              title: "课程列表"
+            }
+          ]
+        },
+        {
+          icon: "el-icon-user-solid",
+          index: "2",
           title: "个人中心",
           subs: [
             {
