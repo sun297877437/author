@@ -171,8 +171,8 @@ export default {
 }
 .user-intro {
   line-height: 24px;
-  font-size: 13px;
-  color: #040404;
+  font-size: 12px;
+  color: #666;
 }
 .el-row {
   margin-bottom: 20px;
@@ -245,7 +245,7 @@ export default {
 .user-info-cont {
   padding-left: 50px;
   flex: 1;
-  font-size: 14px;
+  font-size: 12px;
   color: #999;
 }
 
@@ -259,7 +259,7 @@ export default {
 }
 
 .todo-item {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .todo-item-del {

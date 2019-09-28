@@ -1,7 +1,10 @@
 <template>
   <div class="page">
     <el-row style="margin-top:20px;" type="flex" justify="center" shadow="hover">
-      <el-col :span="22" style="padding:24px;border: 1px solid #ebebeb;border-radius: 3px;;">
+      <el-col
+        :span="22"
+        style="padding:24px;border: 1px solid #ebebeb;border-radius: 3px;background:#ffffff;;"
+      >
         <el-table :data="tableData4" class="table">
           <el-table-column prop="date" label="发布时间"></el-table-column>
           <el-table-column prop="name" label="标题" width="500"></el-table-column>

@@ -1,10 +1,10 @@
 <template>
   <div class="manage_page fillcontain">
     <el-row style="height:100%;">
-      <el-col :span="4" style="min-height:100%;background-color: #324057;overflow: hidden;">
+      <el-col :span="4" style="min-height:100%;background-color: #464c5b;overflow: hidden;">
         <v-side></v-side>
       </el-col>
-      <el-col :span="20" style="height: 100%;overflow: auto;">
+      <el-col :span="20" style="height: 100%;overflow: auto;background:#f5f7f9;">
         <v-header></v-header>
         <keep-alive>
           <router-view></router-view>

@@ -12,7 +12,7 @@
           <el-form
             :model="form"
             label-width="80px"
-            style="border: 1px solid #eaeefb;padding: 10px 10px 0;"
+            style="border: 1px solid #eaeefb;padding: 20px 20px 0;background:#ffffff;"
           >
             <el-form-item label="选择课程">
               <el-input v-model="form.intro"></el-input>
@@ -166,29 +166,10 @@ export default {
 <style lang="scss" scope>
 @import "@/assets/css/mixin.scss";
 .article {
-  height: calc(100% - 60px);
+  height: calc(100% - 70px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-header {
-  height: 60px;
-  padding: 0 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #eaeaea;
-  background: #fff;
-  .h-l {
-    font-size: 16px;
-    font-weight: 500;
-    color: #ed4040;
-  }
-  .h-r {
-    font-size: 14px;
-    font-weight: 500;
-    color: #5990f2;
-  }
 }
 .section-a {
   flex: 1;

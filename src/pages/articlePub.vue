@@ -1,18 +1,12 @@
 <template>
   <div class="article">
-    <!-- <header>
-      <span class="h-l"></span>
-      <span class="h-r">
-        <router-link to="/articleSpecification">发文规范</router-link>
-      </span>
-    </header>-->
     <section class="section-a">
       <el-row style="margin-top:20px;">
         <el-col :span="22" :offset="1">
           <el-form
             :model="form"
             label-width="80px"
-            style="border: 1px solid #eaeefb;padding: 10px 10px 0;"
+            style="border: 1px solid #eaeefb;padding: 20px 20px 0;background:#ffffff;"
           >
             <el-form-item label="标题">
               <el-input v-model="form.title"></el-input>
@@ -225,29 +219,10 @@ export default {
 <style lang="scss" scope>
 @import "@/assets/css/mixin.scss";
 .article {
-  height: calc(100% - 60px);
+  height: calc(100% - 70px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-header {
-  height: 60px;
-  padding: 0 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #eaeaea;
-  background: #fff;
-  .h-l {
-    font-size: 16px;
-    font-weight: 500;
-    color: #ed4040;
-  }
-  .h-r {
-    font-size: 14px;
-    font-weight: 500;
-    color: #5990f2;
-  }
 }
 .section-a {
   flex: 1;
@@ -263,7 +238,7 @@ header {
   border-radius: 26px;
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbIAAANICAYAAACi5WpKAADWv0lEQ…hstKv9Hg+FZUZEE6+aQTNlQsvPob5RPtTfPxFNLVM6sIL8/8I+65iMaciKAAAAAElFTkSuQmCC");
   h1 {
-    font-size: 16px;
+    font-size: 14px;
     padding-bottom: 5px;
   }
   li {
