@@ -53,7 +53,7 @@
         <el-button type="danger" @click="submitForm">立即发表</el-button>
       </div>
     </footer>
-    <el-dialog title="预览" :visible.sync="dialogVisible1" width="365px">
+    <el-dialog title="预览" :visible.sync="dialogVisible1" width="418px">
       <div class="section-b">
         <div class="item">
           <div class="item-t">
@@ -188,15 +188,6 @@ export default {
 };
 </script>
 <style scope>
-.el-dialog__header {
-  display: none;
-}
-.el-dialog__body {
-  padding: 0;
-}
-.el-dialog {
-  border-radius: 26px;
-}
 .avatar-uploader .el-upload {
   border: 1px dashed #d9d9d9;
   border-radius: 6px;
