@@ -188,6 +188,7 @@ export default {
 };
 </script>
 <style scope>
+
 .el-dialog__header {
   display: none;
 }
